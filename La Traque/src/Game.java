@@ -52,7 +52,7 @@ public class Game
        Room vCouloir1= new Room("dans un couloir");
        Room vCouloir2= new Room("dans un couloir");
        Room vCouloir3= new Room("dans un couloir");
-       Room vCouloir4= new Room("dans un couloir");
+       //Room vCouloir4= new Room("dans un couloir");
         
        //position des sorties
       vSeuil.setExits("East",vEntrée);
@@ -139,7 +139,7 @@ public class Game
         }
         
        String vDirection=pDirection.getSecondWord();
-       Room vNextRoom= aCurrentRoom.getExits(vDirection);
+       Room vNextRoom= aCurrentRoom.getExits(vDirection.toLowerCase());
         
         
        if (vNextRoom==null){
@@ -193,31 +193,31 @@ public class Game
     /**
      * assigne Ã  chaque commande la methode correspondante
      */
-    private boolean processCommand(final Command pCommande2)
+    private boolean processCommand(final Command pCommand)
     {
   
-        if (pCommande2.getCommandWord()==null){
+        if (pCommand.getCommandWord()==null){
             System.out.println("I don't know what you mean");
             return false;
         }
         
-        else if (pCommande2.getCommandWord().equals("quit")){
-            return this.quit(pCommande2);
+        else if (pCommand.getCommandWord().equals("quit")){
+            return this.quit(pCommand);
         }
         
-        else if (pCommande2.getCommandWord().equals("help")){
+        else if (pCommand.getCommandWord().equals("help")){
             this.printHelp();
         }
          
-        else if (pCommande2.getCommandWord().equals("go")){
-            this.goRoom(pCommande2);
+        else if (pCommand.getCommandWord().equals("go")){
+            this.goRoom(pCommand);
         }
         
-        else if (pCommande2.getCommandWord().equals("look")){
-            this.look();
+        else if (pCommand.getCommandWord().equals("look")){
+            this.look(pCommand);
         }
         
-         else if (pCommande2.getCommandWord().equals("eat")){
+         else if (pCommand.getCommandWord().equals("eat")){
             System.out.println("Vous avez fait taire votre faim, pour l'instant...");
         }
         return false;
@@ -226,8 +226,9 @@ public class Game
     
     /**
      * Affiche la description de la CurrentRoom
+     * @param pCommand 
      */
-    private void look()
+    private void look(Command pCommand)
     {
         System.out.println(aCurrentRoom.getLongDescription());
     }
