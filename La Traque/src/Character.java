@@ -6,6 +6,8 @@ import java.util.Map;
  * @author (your name) 
  * @version (a version number or a date)
  */
+
+// modif git
 public class Character
 {
     private Boolean aCalme;

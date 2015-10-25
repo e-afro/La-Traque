@@ -52,7 +52,6 @@ public class Game
        Room vCouloir1= new Room("dans un couloir");
        Room vCouloir2= new Room("dans un couloir");
        Room vCouloir3= new Room("dans un couloir");
-       Room vCouloir4= new Room("dans un couloir");
         
        //position des sorties
       vSeuil.setExits("East",vEntree);
