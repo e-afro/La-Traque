@@ -34,7 +34,7 @@ public class Character
         this.aInventaire.remove(pName,vObject);
     }
     
-    public Map getInventaire()
+    public Map<String, Object> getInventaire()
     {
         return aInventaire;
     }

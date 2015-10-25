@@ -32,7 +32,7 @@ public class Game
     {
        //création des cinq lieux
        Room vSeuil= new Room("sur le seuil de la maison");
-       Room vEntrée= new Room("dans l'entrée");
+       Room vEntree= new Room("dans l'entrée");
        Room vVestiaire= new Room("dans le vestiaire");
        Room vSalon= new Room("dans le salon");
        Room vSalleAManger= new Room("dans la salle à manger");
@@ -55,22 +55,22 @@ public class Game
        Room vCouloir4= new Room("dans un couloir");
         
        //position des sorties
-      vSeuil.setExits("East",vEntrée);
-      vEntrée.setExits("East", vSalleAManger);
-      vEntrée.setExits("South",vVestiaire);
+      vSeuil.setExits("East",vEntree);
+      vEntree.setExits("East", vSalleAManger);
+      vEntree.setExits("South",vVestiaire);
       vVestiaire.setExits("East",vSalon);
-      vVestiaire.setExits("North",vEntrée);
+      vVestiaire.setExits("North",vEntree);
       vSalon.setExits("North",vSalleAManger); 
       vSalon.setExits("East",vCouloir);
       vSalon.setExits("South",vEscalier);
       vSalon.setExits("West",vVestiaire);
       vSalleAManger.setExits("North",vCuisine);
       vSalleAManger.setExits("South",vSalon);
-      vSalleAManger.setExits("West", vEntrée);
+      vSalleAManger.setExits("West", vEntree);
       vCuisine.setExits("North",vBalcon);
       vCuisine.setExits("East",vChambreP);
       vCuisine.setExits("South", vSalleAManger);
-      vCuisine.setExits("West",vEntrée);
+      vCuisine.setExits("West",vEntree);
       vBalcon.setExits("North",vSalleDeBain3);
       vBalcon.setExits("South", vCuisine);
       vBalcon.setExits("up",vSalleDeBain3);
@@ -103,8 +103,9 @@ public class Game
       vChambre3.setExits("South", vCouloir2);
       vChambre3.setExits("West", vSalleDeBain3);
        //création des personnages
-       Character vPère= new Character("",true,1);
-       Character vMère= new Character("",true,1);
+       Character vPere= new Character("",true,1);
+       Character vMere= new Character("",true,1);
+       Character vSally= new Character("",false,2);
        Character vChien= new Character("",true,2);
        Character vPerroquet= new Character("",true,0);
        Character vLeatherFace= new Character("",true,2);
@@ -170,7 +171,7 @@ public class Game
     }
     
     /**
-     * Affiche le sinformation liées au (nouveau) lieu courant
+     * Affiche les information liees au (nouveau) lieu courant
      */
     private void printLocationInfo()
     {
@@ -182,8 +183,8 @@ public class Game
      */
     private void printHelp()
     {
-        System.out.println("Vous êtes seul");
-        System.out.println("Rongé par votre désir de vengeance");
+        System.out.println("Vous etes seul");
+        System.out.println("Ronge par votre desir de vengeance");
         System.out.println("");
         System.out.println("Your command words are:");
         
@@ -208,7 +209,7 @@ public class Game
     }// quit()
     
     /**
-     * assigne à chaque commande la methode correspondante
+     * assigne � chaque commande la methode correspondante
      */
     private boolean processCommand(final Command pCommand)
     {
@@ -249,13 +250,13 @@ public class Game
     /**
      * Affiche la description de la CurrentRoom
      */
-    private void look(final Command pCommand)
+    private void look()
     {
         System.out.println(aCurrentRoom.getLongDescription());
     }
     
     /**
-     * gère la partie en attribuant à chaque entrée clavier la methode appropriée
+     * gere la partie en attribuant a chaque entree clavier la methode appropriee
      */
     public void play()
     {
