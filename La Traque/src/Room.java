@@ -1,6 +1,7 @@
  import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+ import java.util.Set;
+ import java.util.Iterator;
+ import java.util.Map;
  
 /**
  *classe servant à définir les salles via leur description et celle de leur proximité immédiate
@@ -34,6 +35,22 @@ public class Room
         return this.aDescription;
     } //getDescrition()
     
+    private String getObjects() 
+    {
+        String objects = "";
+    	for(String obj : this.objects.keySet()) {
+   		objects += obj + "(can be taken)\n";
+    	}
+    	
+     return objects;
+     }
+
+	private String getContainers() 
+	{
+	    String containers = "";
+		return null;
+    }
+    
     /**
      * Retourn une description plus complète de la Room comportant également ses (éventuelles) sorties
      */
@@ -43,21 +60,7 @@ public class Room
         return "You are"+" "+this.aDescription+".\n"+"Exits:"+this.getExitString()+"\n"+getContainers()+getObjects()+"\n";
     }
     
-    private String getObjects() {
-    	String objects = "";
-    	for(String obj : this.objects.keySet()) {
-    		objects += obj + "(can be taken)\n";
-    	}
-    	
-		return objects;
-	}
-
-	private String getContainers() {
-		String containers = "";
-		return null;
-	}
-
-	/**
+    /**
      * retourne la sortie correspondant à la direction passée en paramère
      */
     public Room getExits(final String pDirection)
@@ -73,10 +76,6 @@ public class Room
        exits.put(pDirection.toLowerCase(),pNeighbor);
     }// setExits()
     
-    /**
-     * retourne la liste des sorties d'une Room
-     */
-
     public Container getContainer(final String pContainer) {
     	return containers.get(pContainer);
     }
@@ -100,6 +99,9 @@ public class Room
     	return object;
     }
     
+    /**
+     * retourne la liste des sorties d'une Room
+     */
     public String getExitString()
     {
       String returnString="";

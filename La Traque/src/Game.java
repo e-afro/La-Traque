@@ -11,14 +11,14 @@ public class Game
 {
     private Room aCurrentRoom;
     private Parser aParser;
-    
+    private Character aCurrentCharacter;
     
     /**
      * constructeur par defaut
      */
     public Game()
     {
-        this.createRooms();
+        this.createRoomsCharacters();
         this.aParser=new Parser();
     }//Room()
     
@@ -28,11 +28,11 @@ public class Game
      * initialise le lieu courant
      * 
      */
-    private void createRooms()
+    private void createRoomsCharacters()
     {
        //création des cinq lieux
        Room vSeuil= new Room("sur le seuil de la maison");
-       Room vEntr�e= new Room("dans l'entrée");
+       Room vEntrée= new Room("dans l'entrée");
        Room vVestiaire= new Room("dans le vestiaire");
        Room vSalon= new Room("dans le salon");
        Room vSalleAManger= new Room("dans la salle à manger");
@@ -52,25 +52,25 @@ public class Game
        Room vCouloir1= new Room("dans un couloir");
        Room vCouloir2= new Room("dans un couloir");
        Room vCouloir3= new Room("dans un couloir");
-       //Room vCouloir4= new Room("dans un couloir");
+       Room vCouloir4= new Room("dans un couloir");
         
        //position des sorties
-      vSeuil.setExits("East",vEntr�e);
-      vEntr�e.setExits("East", vSalleAManger);
-      vEntr�e.setExits("South",vVestiaire);
+      vSeuil.setExits("East",vEntrée);
+      vEntrée.setExits("East", vSalleAManger);
+      vEntrée.setExits("South",vVestiaire);
       vVestiaire.setExits("East",vSalon);
-      vVestiaire.setExits("North",vEntr�e);
+      vVestiaire.setExits("North",vEntrée);
       vSalon.setExits("North",vSalleAManger); 
       vSalon.setExits("East",vCouloir);
       vSalon.setExits("South",vEscalier);
       vSalon.setExits("West",vVestiaire);
       vSalleAManger.setExits("North",vCuisine);
       vSalleAManger.setExits("South",vSalon);
-      vSalleAManger.setExits("West", vEntr�e);
+      vSalleAManger.setExits("West", vEntrée);
       vCuisine.setExits("North",vBalcon);
       vCuisine.setExits("East",vChambreP);
       vCuisine.setExits("South", vSalleAManger);
-      vCuisine.setExits("West",vEntr�e);
+      vCuisine.setExits("West",vEntrée);
       vBalcon.setExits("North",vSalleDeBain3);
       vBalcon.setExits("South", vCuisine);
       vBalcon.setExits("up",vSalleDeBain3);
@@ -102,14 +102,19 @@ public class Game
       vCouloir3.setExits("West", vChambre2);
       vChambre3.setExits("South", vCouloir2);
       vChambre3.setExits("West", vSalleDeBain3);
-       //composition des étages
+       //création des personnages
+       Character vPère= new Character("",true,1);
+       Character vMère= new Character("",true,1);
+       Character vChien= new Character("",true,2);
+       Character vPerroquet= new Character("",true,0);
+       Character vLeatherFace= new Character("",true,2);
        
        
        //initialisation du lieu courant
-       this.aCurrentRoom=vSeuil;
+      this.aCurrentRoom=vSeuil;
        
-       //initialisation de l'étage courant
-      
+       //initialisation du personnage jouable
+      this.aCurrentCharacter=vLeatherFace;
     }//createRooms()
     
     /**
@@ -126,6 +131,7 @@ public class Game
         System.out.println("");
         
         this.printLocationInfo();
+        this.look();
     }//printWelcome()
     
     /**
@@ -151,6 +157,17 @@ public class Game
        
       this.printLocationInfo();
     }//goRoom()
+    
+    public void useObject(final Command pObject)
+    {
+         if ( ! pObject.hasSecondWord()){
+            System.out.println("use What ?");
+            return ;
+        }
+        
+       String vObjectName = pObject.getSecondWord();
+       Object vObject =aCurrentCharacter.getInventaire().get(vObjectName);
+    }
     
     /**
      * Affiche le sinformation liées au (nouveau) lieu courant
@@ -214,21 +231,25 @@ public class Game
         }
         
         else if (pCommand.getCommandWord().equals("look")){
-            this.look(pCommand);
+            this.look();
         }
         
          else if (pCommand.getCommandWord().equals("eat")){
             System.out.println("Vous avez fait taire votre faim, pour l'instant...");
         }
+        
+         else if (pCommand.getCommandWord().equals("use")){
+            this.useObject(pCommand);
+        }
+        
         return false;
         
     }// processCommand()
     
     /**
      * Affiche la description de la CurrentRoom
-     * @param pCommand 
      */
-    private void look(Command pCommand)
+    private void look(final Command pCommand)
     {
         System.out.println(aCurrentRoom.getLongDescription());
     }

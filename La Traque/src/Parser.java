@@ -65,8 +65,6 @@ public class Parser
             } // if
         } // if
 
-        vTokenizer.close();
-        
         // Veifie si le premier mot est une commande connue. Si oui, cree une Command avec.
         // Sinon, cree une commande vide avec "null" (pour dire 'commande inconnue').
         if ( this.aValidCommands.isCommand( vWord1 ) ) {
