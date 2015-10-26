@@ -44,6 +44,7 @@ public class Room
     	
      return objects;
      }
+    
 
 	private String getContainers() 
 	{
@@ -101,6 +102,10 @@ public class Room
     	objects.remove(pObject, object);
     	
     	return object;
+    }
+    
+    public Map<String, Object> canTook() {
+    	return objects;
     }
     
     /**

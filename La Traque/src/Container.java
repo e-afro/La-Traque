@@ -32,4 +32,8 @@ public class Container {
     	
     	return object;
     }
+    
+    public Map<String,Object> canTook() {
+    	return objects;
+    }
 }

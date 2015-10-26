@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
  
 
 
@@ -12,6 +15,7 @@ public class Game
     private Room aCurrentRoom;
     private Parser aParser;
     private Character aCurrentCharacter;
+    private Map<String, Object> canTook;
     
     /**
      * constructeur par defaut
@@ -20,6 +24,7 @@ public class Game
     {
         this.createRoomsCharacters();
         this.aParser=new Parser();
+        canTook = new HashMap<String, Object>();
     }//Room()
     
     /**
@@ -160,7 +165,9 @@ public class Game
            System.out.println("there is no door!");
         }
        else{
+    	   canTook.clear();
            this.aCurrentRoom=vNextRoom;
+           canTook.putAll(aCurrentRoom.canTook());
         } 
        
       this.printLocationInfo();
@@ -270,6 +277,7 @@ public class Game
     			System.out.println("Container '" + container + "' doesn't exist.");
     			return;
     		}
+    		canTook.putAll(c.canTook());
     		System.out.println(c.getObjects());
     	}
     }
