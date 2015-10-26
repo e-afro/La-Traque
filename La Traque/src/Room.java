@@ -15,6 +15,7 @@ public class Room
     private HashMap<String, Room> exits;
     private Map<String, Container> containers;
     private Map<String, Object> objects;
+    private Map<String, Door> aDoors;
     
     /**
      * constructeur (plus) naturel
@@ -25,6 +26,7 @@ public class Room
         exits=new HashMap<String, Room>();
         containers = new HashMap<String, Container>();
         objects = new HashMap<String, Object>();
+        aDoors= new HashMap<String, Door>();
     }//Room()
 
     /**
@@ -75,6 +77,16 @@ public class Room
     {
        exits.put(pDirection.toLowerCase(),pNeighbor);
     }// setExits()
+    
+    public void setDoors(final String pDirection,final Door pDoor)
+    {
+        aDoors.put(pDirection.toLowerCase(),pDoor);
+    }
+    
+     public Door getDoor(final String pDirection)
+    {
+        return aDoors.get(pDirection);
+    }
     
     public Container getContainer(final String pContainer) {
     	return containers.get(pContainer);
