@@ -164,6 +164,13 @@ public class Game
        if (vNextRoom==null){
            System.out.println("there is no door!");
         }
+       else if (aCurrentRoom.getDoor(vDirection).getEtat("aClosed")==true){
+           System.out.println("this door is closed!");
+        }
+        
+       else if (aCurrentRoom.getDoor(vDirection).getEtat("aLocked")==true){
+           System.out.println("this door is Locked!");
+        }
        else{
     	   canTook.clear();
            this.aCurrentRoom=vNextRoom;
@@ -172,18 +179,7 @@ public class Game
        
       this.printLocationInfo();
     }//goRoom()
-    
-    public void useObject(final Command pObject)
-    {
-         if ( ! pObject.hasSecondWord()){
-            System.out.println("use What ?");
-            return ;
-        }
         
-       String vObjectName = pObject.getSecondWord();
-       Object vObject =aCurrentCharacter.getInventaire().get(vObjectName);
-    }
-    
     /**
      * Affiche les information liees au (nouveau) lieu courant
      */
@@ -260,6 +256,18 @@ public class Game
         return false;
         
     }// processCommand()
+    
+    public void useObject(final Command pObject)
+    {
+       if ( ! pObject.hasSecondWord()){
+            System.out.println("use What ?");
+            return ;
+       }
+       
+       else{
+        aCurrentCharacter.use(pObject.getSecondWord());
+       }
+    }
     
     /**
      * Affiche la description de la CurrentRoom
