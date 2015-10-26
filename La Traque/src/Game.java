@@ -32,7 +32,7 @@ public class Game
     {
        //création des cinq lieux
        Room vSeuil= new Room("sur le seuil de la maison");
-       Room vEntree= new Room("dans l'entrée");
+       Room vEntree= new Room("dans l'entree");
        Room vVestiaire= new Room("dans le vestiaire");
        Room vSalon= new Room("dans le salon");
        Room vSalleAManger= new Room("dans la salle à manger");
@@ -52,6 +52,14 @@ public class Game
        Room vCouloir1= new Room("dans un couloir");
        Room vCouloir2= new Room("dans un couloir");
        Room vCouloir3= new Room("dans un couloir");
+       
+       //Creation conteneur
+       Container frigo = new Container();
+       vEntree.setContainer("frigo", frigo);
+       
+       //Creatino objet
+       Object fruit = new Object();
+       frigo.setObject("fruit", fruit);
         
        //position des sorties
       vSeuil.setExits("East",vEntree);
@@ -131,7 +139,7 @@ public class Game
         System.out.println("");
         
         this.printLocationInfo();
-        this.look();
+        this.look(new Command("look", null));
     }//printWelcome()
     
     /**
@@ -231,7 +239,7 @@ public class Game
         }
         
         else if (pCommand.getCommandWord().equals("look")){
-            this.look();
+            this.look(pCommand);
         }
         
          else if (pCommand.getCommandWord().equals("eat")){
@@ -248,10 +256,22 @@ public class Game
     
     /**
      * Affiche la description de la CurrentRoom
+     * @param pCommand 
      */
-    private void look()
+    private void look(Command pCommand)
     {
-        System.out.println(aCurrentRoom.getLongDescription());
+    	String container = pCommand.getSecondWord();
+    	if(container == null) {
+    		System.out.println(aCurrentRoom.getLongDescription());
+    	}
+    	else {
+    		Container c = aCurrentRoom.getContainer(container);
+    		if(c == null) {
+    			System.out.println("Container '" + container + "' doesn't exist.");
+    			return;
+    		}
+    		System.out.println(c.getObjects());
+    	}
     }
     
     /**
@@ -262,7 +282,7 @@ public class Game
        this.printWelcome();
        boolean vFinished=false;
        
-      while (vFinished==false){
+       while (vFinished==false){
            Command Commande=aParser.getCommand();
            vFinished=this.processCommand(Commande);
        }

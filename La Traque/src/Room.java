@@ -48,7 +48,11 @@ public class Room
 	private String getContainers() 
 	{
 	    String containers = "";
-		return null;
+	    for(String container : this.containers.keySet()) {
+	    	containers += container + " (can be looked in)\n";
+	    }
+	    
+		return containers;
     }
     
     /**
