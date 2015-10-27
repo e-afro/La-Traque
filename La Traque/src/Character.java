@@ -56,7 +56,7 @@ public class Character
             this.useBoiteaMusique();
         }
         
-        if(aValidite=true){
+        if(aValidite==true){
             SomeObject vObject = aInventaire.get(pName);
             this.aInventaire.remove(pName,vObject);
         }
