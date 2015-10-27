@@ -285,7 +285,7 @@ public class Game
     			System.out.println("Container '" + container + "' doesn't exist.");
     			return;
     		}
-    		canTook.putAll(c.canTook());
+    		canTook.putAll(c.canBeTaken());
     		System.out.println(c.getObjects());
     	}
     }

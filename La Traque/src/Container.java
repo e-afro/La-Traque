@@ -33,7 +33,7 @@ public class Container {
     	return someObject;
     }
     
-    public Map<String,SomeObject> canTook() {
+    public Map<String,SomeObject> canBeTaken() {
     	return someObjects;
     }
 }
