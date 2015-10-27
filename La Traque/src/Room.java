@@ -14,7 +14,7 @@ public class Room
     private String aDescription;
     private HashMap<String, Room> exits;
     private Map<String, Container> containers;
-    private Map<String, Object> objects;
+    private Map<String, SomeObject> someObjects;
     private Map<String, Door> aDoors;
     
     /**
@@ -25,7 +25,7 @@ public class Room
         this.aDescription=pDescription;
         exits=new HashMap<String, Room>();
         containers = new HashMap<String, Container>();
-        objects = new HashMap<String, Object>();
+        someObjects = new HashMap<String, SomeObject>();
         aDoors= new HashMap<String, Door>();
     }//Room()
 
@@ -40,7 +40,7 @@ public class Room
     private String getObjects() 
     {
         String objects = "";
-    	for(String obj : this.objects.keySet()) {
+    	for(String obj : this.someObjects.keySet()) {
    		objects += obj + "(can be taken)\n";
     	}
     	
@@ -101,23 +101,23 @@ public class Room
     	containers.put(pName.toLowerCase(), pContainer);
     }
     
-    public Object getObject(final String pObject) {
-    	return objects.get(pObject);
+    public SomeObject getObject(final String pObject) {
+    	return someObjects.get(pObject);
     }
     
-    public void setObject(final String pName, final Object pObject) {
-    	objects.put(pName, pObject);
+    public void setObject(final String pName, final SomeObject pObject) {
+    	someObjects.put(pName, pObject);
     }
     
-    public Object taken(final String pObject) {
-    	Object object = objects.get(pObject);
-    	objects.remove(pObject, object);
+    public SomeObject taken(final String pObject) {
+    	SomeObject someObject = someObjects.get(pObject);
+    	someObjects.remove(pObject, someObject);
     	
-    	return object;
+    	return someObject;
     }
     
-    public Map<String, Object> canTook() {
-    	return objects;
+    public Map<String, SomeObject> canTook() {
+    	return someObjects;
     }
     
     /**

@@ -11,9 +11,9 @@ import java.util.Map;
 public class Character
 {
     private Boolean aCalme;
-    private Map<String, Object> aInventaire;
+    private Map<String, SomeObject> aInventaire;
     private int aStamina;
-    private int aMaxStamina;
+    private final int aMaxStamina;
     private String aDescription;
     private Boolean aValidite;
 
@@ -29,7 +29,7 @@ public class Character
        this.aValidite=true;
     }
     
-    public void setInventaire(final String pName, final Object pObject)
+    public void setInventaire(final String pName, final SomeObject pObject)
     {
         this.aInventaire.put(pName,pObject);
     }
@@ -57,7 +57,7 @@ public class Character
         }
         
         if(aValidite=true){
-            Object vObject = aInventaire.get(pName);
+            SomeObject vObject = aInventaire.get(pName);
             this.aInventaire.remove(pName,vObject);
         }
     }
@@ -97,7 +97,7 @@ public class Character
         //[...]
     }
     
-    public Map<String, Object> getInventaire()
+    public Map<String, SomeObject> getInventaire()
     {
         return aInventaire;
     }

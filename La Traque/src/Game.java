@@ -15,7 +15,7 @@ public class Game
     private Room aCurrentRoom;
     private Parser aParser;
     private Character aCurrentCharacter;
-    private Map<String, Object> canTook;
+    private Map<String, SomeObject> canTook;
     
     /**
      * constructeur par defaut
@@ -24,7 +24,7 @@ public class Game
     {
         this.createRoomsCharacters();
         this.aParser=new Parser();
-        canTook = new HashMap<String, Object>();
+        canTook = new HashMap<String, SomeObject>();
     }//Room()
     
     /**
@@ -63,7 +63,7 @@ public class Game
        vEntree.setContainer("frigo", frigo);
        
        //Creatino objet
-       Object fruit = new Object();
+       SomeObject fruit = new SomeObject();
        frigo.setObject("fruit", fruit);
         
        //position des sorties
